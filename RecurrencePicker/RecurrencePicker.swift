@@ -20,6 +20,10 @@ public class RecurrencePicker: UITableViewController {
     public var tintColor = UIColor.blueColor()
     public var calendar = NSCalendar.currentCalendar()
     public var occurrenceDate = NSDate()
+    
+    public func customRecurrenceViewControllerInstance() -> CustomRecurrenceViewController {
+        return CustomRecurrenceViewController(style: .Grouped)
+    }
 
     private var recurrenceRule: RecurrenceRule?
     private var selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -129,7 +133,7 @@ extension RecurrencePicker {
             updateRecurrenceRuleText()
             navigationController?.popViewControllerAnimated(true)
         } else {
-            let customRecurrenceViewController = CustomRecurrenceViewController(style: .Grouped)
+            let customRecurrenceViewController = customRecurrenceViewControllerInstance()
             customRecurrenceViewController.occurrenceDate = occurrenceDate
             customRecurrenceViewController.tintColor = tintColor
             customRecurrenceViewController.delegate = self

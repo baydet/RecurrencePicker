@@ -15,7 +15,7 @@ internal protocol CustomRecurrenceViewControllerDelegate {
 
 }
 
-internal class CustomRecurrenceViewController: UITableViewController {
+public class CustomRecurrenceViewController: UITableViewController {
     internal var delegate: CustomRecurrenceViewControllerDelegate?
     internal var occurrenceDate: NSDate!
     internal var tintColor: UIColor!
