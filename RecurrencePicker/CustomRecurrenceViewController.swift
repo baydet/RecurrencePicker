@@ -37,12 +37,12 @@ public class CustomRecurrenceViewController: UITableViewController {
     }
 
     // MARK: - Life cycle
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
     }
 
-    override func didMoveToParentViewController(parent: UIViewController?) {
+    override public func didMoveToParentViewController(parent: UIViewController?) {
         if parent == nil {
             // navigation is popped
             delegate?.customRecurrenceViewController(self, didPickRecurrence: recurrenceRule)
@@ -135,14 +135,14 @@ extension CustomRecurrenceViewController {
 
 extension CustomRecurrenceViewController {
     // MARK: - Table view data source and delegate
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if recurrenceRule.frequency == .Daily {
             return 1
         }
         return 2
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return isShowingPickerView ? 3 : 2
         } else {
@@ -154,7 +154,7 @@ extension CustomRecurrenceViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if isPickerViewCell(indexPath) {
             return Constant.pickerViewCellHeight
         } else if isSelectorViewCell(indexPath) {
@@ -166,14 +166,14 @@ extension CustomRecurrenceViewController {
         return Constant.defaultRowHeight
     }
 
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 0 {
             return recurrenceRule.toText(occurrenceDate: occurrenceDate)
         }
         return nil
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if isPickerViewCell(indexPath) {
             let cell = tableView.dequeueReusableCellWithIdentifier(CellID.pickerViewCell, forIndexPath: indexPath) as! PickerViewCell
             cell.delegate = self
@@ -228,7 +228,7 @@ extension CustomRecurrenceViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         guard !isPickerViewCell(indexPath) else {
             return
         }
@@ -396,7 +396,7 @@ extension CustomRecurrenceViewController: MonthOrDaySelectorCellDelegate {
 }
 
 extension CustomRecurrenceViewController {
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         coordinator.animateAlongsideTransition({ (context) -> Void in
 
